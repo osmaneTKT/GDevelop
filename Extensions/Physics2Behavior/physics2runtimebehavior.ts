@@ -476,6 +476,40 @@ namespace gdjs {
       return true;
     }
 
+    getNetworkSyncData() {
+      return {
+        ...super.getNetworkSyncData(),
+        props: {
+          oox: this._objectOldX,
+          ooy: this._objectOldY,
+          ooa: this._objectOldAngle,
+          oow: this._objectOldWidth,
+          ooh: this._objectOldHeight,
+        },
+      };
+    }
+
+    updateFromNetworkSyncData(networkSyncData: any) {
+      super.updateFromNetworkSyncData(networkSyncData);
+
+      const behaviorSpecificProps = networkSyncData.props;
+      if (behaviorSpecificProps.oox !== undefined) {
+        this._objectOldX = behaviorSpecificProps.oox;
+      }
+      if (behaviorSpecificProps.ooy !== undefined) {
+        this._objectOldY = behaviorSpecificProps.ooy;
+      }
+      if (behaviorSpecificProps.ooa !== undefined) {
+        this._objectOldAngle = behaviorSpecificProps.ooa;
+      }
+      if (behaviorSpecificProps.oow !== undefined) {
+        this._objectOldWidth = behaviorSpecificProps.oow;
+      }
+      if (behaviorSpecificProps.ooh !== undefined) {
+        this._objectOldHeight = behaviorSpecificProps.ooh;
+      }
+    }
+
     onDeActivate() {
       this._sharedData.removeFromBehaviorsList(this);
       if (this._body !== null) {
