@@ -736,19 +736,6 @@ const ObjectsList = React.forwardRef<Props, ObjectsListInterface>(
         selectObjectFolderOrObjectWithContext,
       ]
     );
-    React.useEffect(
-      () => {
-        if (keyboardShortcutsRef.current) {
-          keyboardShortcutsRef.current.setShortcutCallback(
-            'onDuplicate',
-            () => {
-              duplicateObject(selectedObjectFolderOrObjectsWithContext[0]);
-            }
-          );
-        }
-      },
-      [selectedObjectFolderOrObjectsWithContext, duplicateObject]
-    );
 
     React.useEffect(() => {
       if (keyboardShortcutsRef.current) {
@@ -758,7 +745,9 @@ const ObjectsList = React.forwardRef<Props, ObjectsListInterface>(
           );
         });
         keyboardShortcutsRef.current.setShortcutCallback('onDuplicate', () => {
+
           duplicateObjectFolderOrObjectWithContext(
+
             selectedObjectFolderOrObjectsWithContext[0]
           );
         });
@@ -767,6 +756,7 @@ const ObjectsList = React.forwardRef<Props, ObjectsListInterface>(
       selectedObjectFolderOrObjectsWithContext,
       deleteObjectFolderOrObjectWithContext,
       duplicateObjectFolderOrObjectWithContext,
+
     ]);
 
     const rename = React.useCallback(
@@ -1439,7 +1429,6 @@ const ObjectsList = React.forwardRef<Props, ObjectsListInterface>(
             label: i18n._(t`Duplicate`),
             click: () => duplicateObjectFolderOrObjectWithContext(item),
             accelerator: 'CmdOrCtrl+D',
-
           },
           {
             label: i18n._(t`Rename`),
